@@ -6,7 +6,11 @@
 #include <pcre.h>
 
 int guessletter(char *word) {
-	//int letter = getchar();
+	/*
+	this function uses PCRE regex to allow input
+	only of letter for the hangman
+	pcre_example.c was used for regex usage example
+	*/
 
 	char *regex;
 	pcre *reCompiled;
@@ -15,19 +19,13 @@ int guessletter(char *word) {
 	int subStrVec[30];
 	int pcreExecRet;
 	char letter[2];
-//	char *fgets(char *s, int size, FILE *stream
 
-	// compile regex (credit: pcre_example.c)
+	// compile regex
 	regex = "[a-z]";
 	reCompiled = pcre_compile(regex, 0, &pcreErrorStr, &pcreErrorOffset, NULL);
 
 	if (reCompiled == NULL) {
 		printf("ERROR: Could not compile '%s': %s\n", regex, pcreErrorStr);
-		exit(1);
-	}
-
-	if(pcreErrorStr != NULL) {
-		printf("ERROR: Could not study '%s': %s\n", regex, pcreErrorStr);
 		exit(1);
 	}
 
