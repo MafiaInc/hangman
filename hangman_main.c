@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <word.h>
+#include <user_input.h>
 
 #define DICTIONARY "dictionary.dat"
 
@@ -19,5 +20,8 @@ void main() {
 	}
 
 	printf("Debug: %s\n", word);
+
+    guessletter(word);
+
 	free(word);
 }

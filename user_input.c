@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <ctype.h>
+#include <user_input.h>
 
 int guessletter(char *word) {
 	/*
@@ -10,24 +8,31 @@ int guessletter(char *word) {
 	*/
 
 	char letter;
+	int guessed = 0;
 
 	/* use system call to make terminal send all keystrokes directly to stdin */
 	system ("/bin/stty raw");
 	do 
 	{
 		//printf("\033[2J"); //clear screen
-		printf("\rGuess a letter:  \b");
-		scanf("%c", &letter);
+		printf ("\rGuess a letter:  \b");
+		scanf ("%c", &letter);
 	} while ((letter < 'a') || (letter > 'z'));
 	system ("/bin/stty cooked");
 
 	printf("\nDebug: %c\n", letter);
 
-	return 0;
-}
+	for (int i = 0; word[i] != '\0'; i++) {
+		if (word[i] == letter) {
+			guessed++;
+		}
+	}
 
-void main() {
-	char *word;
+	if (guessed > 0) {
+		printf ("Debug: guessed %i letters\n", guessed);
+	} else {
+		printf ("Debug: NONE guessed\n");
+	}
 
-	guessletter(word);
+	return guessed;
 }
